@@ -66,5 +66,5 @@ function playGame() {
         }
     }
     console.log("End result")
-    console.log("Computer: " + computerScore + "You: " + humanScore);
+    console.log("Computer: " + computerScore + " You: " + humanScore);
 }
