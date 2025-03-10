@@ -1,2 +1,26 @@
-<h1>This is a console based web-app. All output is in the console</h1>
-<script src="script.js"></script>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="content-container">
+            <h1>Rock Paper Scissors</h1>
+            <div id="button-container">
+                <img src="./images/paper.png" id="paper" class="option">
+                <img src="./images/rock.png" id="rock" class="option">
+                <img src="./images/scissors.png" id="scissors" class="option">
+            </div>
+            <div id="result-container">
+                <div id = "result-column-1"></div>
+                <h1 id="versus">VS</h1>
+                <div id = "result-column-2"></div>
+            </div>
+            <h2 id="result-text"></h2>
+            <button id="next-button">Next Round</button>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
+

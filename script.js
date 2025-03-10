@@ -1,5 +1,46 @@
+let humanScore = 0;
+let computerScore = 0;
+let result = document.getElementById("result-container");
+let rColumn1 = document.getElementById("result-column-1");
+let rColumn2 = document.getElementById("result-column-2");
+let resultText = document.getElementById("result-text");
+let nextButton = document.getElementById("next-button");
 
-playGame();
+let images = 
+{
+    "rock" : "./images/rock.png",
+    "paper" : "./images/paper.png",
+    "scissors" : "./images/scissors.png"
+};
+
+let buttons = document.getElementsByClassName("option");
+
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", () => {
+        let id = event.target.id;
+        if(id == "paper") {
+            playRound("paper");
+        }
+        else if (id == "rock") {
+            playRound("rock");
+        }
+        else{
+            playRound("scissors");
+        }
+    });
+}
+
+nextButton.addEventListener('click', () =>{
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].style.display = "flex";
+    }
+    result.style.display = "none";
+    rColumn1.innerHTML = ``;
+    rColumn2.innerHTML = ``;
+    nextButton.style.display = "none";
+    resultText.innerText = ``;
+});
+
 
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
@@ -7,64 +48,35 @@ function getComputerChoice() {
     return random;
 }
 
-function getHumanChoice() {
-    let choice = "None";
-    while(choice == "None") {
-        choice = prompt("Please enter rock, paper or scissors", "None");
-        if (choice == "Rock" || "rock") {
-            return "Rock";
-        }
-        else if (choice == "Paper" || "paper") {
-            return "Paper";
-        }
-        else if (choice == "Scissors" || choice == "scissors") {
-            return "Scissors";
-        }
-        else {
-            console.log("Invalid choice!");
-            choice = "None";
-        }
-    }
-    return choice;
-}
-
-function playRound() {
+function playRound(option) {
     let comp = getComputerChoice();
-    let player = getHumanChoice();
+    let player = option;
     let hChoice = player.toLowerCase();
     let cChoice = comp.toLowerCase();
     if ((hChoice == "rock" && cChoice == "paper") || (hChoice == "paper" && cChoice == "scissors") || (hChoice == "scissors" && cChoice == "rock")) {
-        console.log("Your choice: " + hChoice);
-        console.log("Computer's choice: " + cChoice);
-        console.log("You have lost.");
-        return "player";
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.display = "none";
+        }
+        resultText.innerText = "You lost!";
+        computerScore++;
     }
     else if ((cChoice == "rock" && hChoice == "paper") || (cChoice == "paper" && hChoice == "scissors") || (cChoice == "scissors" && hChoice == "rock")) {
-        console.log("Your choice: " + hChoice);
-        console.log("Computer's choice: " + cChoice);
-        console.log("You have won.");
-        return "computer";
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.display = "none";
+        }
+        resultText.innerText = "You lost!";
+        humanScore++;
     }
     else {
-        console.log("Both of you picked: " + hChoice);
-        console.log("You have tied.");  
-        return "none";
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.display = "none";
+        }
+        resultText.innerText = "You tied!";
     }
+    result.style.display = "flex";
+    //add data for the columns later
+    rColumn1.innerHTML = `<img src="${images[hChoice]}" id="${hChoice}" class="option"><h3>Your Choice</h3>`;
+    rColumn2.innerHTML = `<img src="${images[cChoice]}" id="${cChoice}" class="option"><h3>Computer's Choice</h3>`;
+    nextButton.style.display = "block";
 }
 
-function playGame() {
-   
-    let humanScore = 0;
-    let computerScore = 0;
-    for(let i = 0; i <= 5; i++) {
-        let result = playRound();
-        if(result == "player") {
-            humanScore++;
-        }
-        else if (result == "computer") {
-            computerScore++;
-        }
-    }
-    console.log("End result")
-    console.log("Computer: " + computerScore + " You: " + humanScore);
-}
