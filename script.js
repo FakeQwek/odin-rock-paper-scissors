@@ -5,6 +5,8 @@ let rColumn1 = document.getElementById("result-column-1");
 let rColumn2 = document.getElementById("result-column-2");
 let resultText = document.getElementById("result-text");
 let nextButton = document.getElementById("next-button");
+let hScore = document.getElementById("h-score");
+let cScore = document.getElementById("c-score");
 
 let images = 
 {
@@ -78,5 +80,8 @@ function playRound(option) {
     rColumn1.innerHTML = `<img src="${images[hChoice]}" id="${hChoice}" class="option"><h3>Your Choice</h3>`;
     rColumn2.innerHTML = `<img src="${images[cChoice]}" id="${cChoice}" class="option"><h3>Computer's Choice</h3>`;
     nextButton.style.display = "block";
+    
+    hScore.innerText = `Your Score: ${humanScore}`;
+    cScore.innerText = `Computer Score: ${computerScore}`;
 }
 
